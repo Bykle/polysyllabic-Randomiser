@@ -28,6 +28,7 @@ class Randomiser:
             newWord = newWord.title()
         
         # TODO: Support brackets (){}[]
+        # If our original word had some sort of punctuation, then copy it over.
         if keepPunctuation and word[-1] in ['?','.',',','!']:
             newWord += str(word[-1])
 
@@ -48,6 +49,20 @@ class Randomiser:
         # Join and return our new funky string
         return ' '.join(words)
 
+    def interactiveInput(self, exitTerm=""):
+        try:
+            sentence = input('> ')
+            while sentence != exitTerm:
+                print(randomiser.replaceSentence(sentence))
+                sentence = input('> ')
+        except EOFError:
+            # Catch if a user pressed CTRL+D (EOF)
+            print("")
+            return
+        except KeyboardInterrupt:
+            # Catch if a user pressed CTRL+C (SIGINT)
+            print("")
+            return
+            
 if __name__=="__main__":
-    randomiser = Randomiser("dictionary.json")
-    print(randomiser.replaceSentence('For integers, there is uniform selection from a range. For sequences, there is uniform selection of a random element, a function to generate a random permutation of a list in-place, and a function for random sampling without replacement.'))
+    Randomiser("dictionary.json").interactiveInput()
