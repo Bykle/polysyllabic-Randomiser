@@ -45,16 +45,16 @@ def generateDict(words, firstLetters=2):
         # Count how many syllables are in this word.
         syllableCount = countSyllables(word)
         
-        # Add a new first letter index to our dict if it does not exist
-        if not word[0] in dictionary:
-            dictionary[word[0]] = {}
+        # Add a new first letters index to our dict if it does not exist
+        if not word[0:firstLetters] in dictionary:
+            dictionary[word[0:firstLetters]] = {}
         
         # Add a syllable count to our index if it does not exist
-        if not syllableCount in dictionary[word[0]]:
-            dictionary[word[0]][syllableCount] = []
+        if not syllableCount in dictionary[word[0:firstLetters]]:
+            dictionary[word[0:firstLetters]][syllableCount] = []
         
-        # Add the word to our dict, sorted by first letter and syllable count
-        dictionary[word[0]][syllableCount].append(word)
+        # Add the word to our dict, sorted by first letters and syllable count
+        dictionary[word[0:firstLetters]][syllableCount].append(word)
     
     return dictionary
 
