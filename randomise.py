@@ -85,5 +85,4 @@ if __name__=="__main__":
         randomiser.interactiveInput()
     else:
         for line in sys.stdin:
-            print(line)
             print(randomiser.replaceSentence(line.rstrip()))
