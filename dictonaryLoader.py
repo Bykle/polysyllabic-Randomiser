@@ -32,7 +32,7 @@ def fetchWords(url):
     except:
         raise Exception("Could not split word list. Is this a valid list?")
 
-def generateDict(words):
+def generateDict(words, firstLetters=2):
     dictionary = {}
     
     for word in words:
@@ -60,14 +60,12 @@ def generateDict(words):
 
 def main(url, file):
     print(f"Fetching words from: {url}")
-    
     words = fetchWords(url)
+    
     print(f"Got {len(words)} words. Generating dictionary file.")
-
     dictionary = generateDict(words)
 
     print(f"Generated dictionary, writing contents to {file}.")
-    
     with open(file, 'w') as handle:
         json.dump(dictionary, handle, indent=4)
 
