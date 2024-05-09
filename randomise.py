@@ -13,18 +13,18 @@ class Randomiser:
         with open(path,'r') as handle:
             return json.load(handle)
     
-    def replaceWord(self, word, keepCaptial=True, keepPunctuation=True):
+    def replaceWord(self, word, firstLetters=2, keepCaptial=True, keepPunctuation=True):
         # Count how many syllables are in this word
         syllableCount = countSyllables(word)
         
         # Search for similar words
-        potentialWords = self.dictionary[word[0].lower()][str(syllableCount)]
+        potentialWords = self.dictionary[word[0:firstLetters].lower()][str(syllableCount)]
         
         # Select one at random
         newWord = potentialWords[random.randint(0, len(potentialWords))]
         
         # If our original word was capitalised, then capitalise this one too.
-        if keepCaptial and word[0].isupper():
+        if keepCaptial and word[0:firstLetters].isupper():
             newWord = newWord.title()
         
         # TODO: Support brackets (){}[]
