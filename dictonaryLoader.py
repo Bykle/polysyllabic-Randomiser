@@ -1,0 +1,65 @@
+#!/usr/bin/env python3
+
+# Generates an organised dictionary for use with the randomiser
+
+from common import countSyllables
+import requests
+import json
+
+listUrl = "https://github.com/dwyl/english-words/raw/master/words_alpha.txt"
+dictionaryFile = 'dictionary.json'
+
+def fetchWords(url):
+    request = requests.get(url)
+    delimeter = '\n'
+    
+    if request.status_code != 200:
+        raise Exception(f"HTTP: {request.status_code} - Failed to request word list.")
+
+    try:
+        return request.text.split(delimeter)
+    except:
+        raise Exception("Could not split word list. Is this a valid list?")
+
+def generateDict(words):
+    dictionary = {}
+    
+    for word in words:
+        word = word.strip()
+        
+        # Don't process any empty lines
+        if len(word) == 0:
+            continue
+        
+        # Count how many syllables are in this word.
+        syllableCount = countSyllables(word)
+        
+        # Add a new first letter index to our dict if it does not exist
+        if not word[0] in dictionary:
+            dictionary[word[0]] = {}
+        
+        # Add a syllable count to our index if it does not exist
+        if not syllableCount in dictionary[word[0]]:
+            dictionary[word[0]][syllableCount] = []
+        
+        # Add the word to our dict, sorted by first letter and syllable count
+        dictionary[word[0]][syllableCount].append(word)
+    
+    return dictionary
+
+def main(url, file):
+    print(f"Fetching words from: {url}")
+    
+    words = fetchWords(url)
+    print(f"Got {len(words)} words. Generating dictionary file.")
+
+    dictionary = generateDict(words)
+
+    print(f"Generated dictionary, writing contents to {file}.")
+    
+    with open(file, 'w') as handle:
+        json.dump(dictionary, handle, indent=4)
+
+if __name__=="__main__":
+    main(url=listUrl,
+        file=dictionaryFile)
