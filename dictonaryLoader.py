@@ -6,7 +6,18 @@ from common import countSyllables
 import requests
 import json
 
-listUrl = "https://github.com/dwyl/english-words/raw/master/words_alpha.txt"
+# Compatible source dictionaries.
+sources = {
+    # Contains a list of over 470k words, might have some weird ones
+    "ALL_WORDS":"https://github.com/dwyl/english-words/raw/master/words_alpha.txt",
+    # Contains more common words, could be less interesting but might make sentences that generally just make more sense.
+    "COMMON_WORDS":"https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english.txt"
+}
+
+# Select a dictionary here.
+listUrl = sources["COMMON_WORDS"]
+
+# We will save our dictionary file here.
 dictionaryFile = 'dictionary.json'
 
 def fetchWords(url):
