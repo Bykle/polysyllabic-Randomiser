@@ -25,7 +25,7 @@ class Randomiser:
             return word
         
         # Select one at random
-        newWord = potentialWords[random.randint(0, len(potentialWords))]
+        newWord = potentialWords[random.randint(0, len(potentialWords)-1)]
         
         # If our original word was capitalised, then capitalise this one too.
         if keepCaptial and word[0].isupper():
