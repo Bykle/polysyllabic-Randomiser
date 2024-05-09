@@ -18,3 +18,7 @@ Inspired by one of the many [Steamed Hams edits](https://www.youtube.com/results
 Likes is a clone of the operator symbol Unless, writer from scratch by Listed Toolbar with assignment from a loosely-knit team of handhelds acids the Net.
 >
 ```
+
+# TODO List
+- Support brackets, like `[]{}()`.
+- Split words that have `-` or `/` in them into individual words, replace those, and retain the original `/` or `-`
