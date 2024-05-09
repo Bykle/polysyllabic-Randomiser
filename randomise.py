@@ -18,13 +18,17 @@ class Randomiser:
         syllableCount = countSyllables(word)
         
         # Search for similar words
-        potentialWords = self.dictionary[word[0:firstLetters].lower()][str(syllableCount)]
+        try:
+            potentialWords = self.dictionary[word[0:firstLetters].lower()][str(syllableCount)]
+        except KeyError:
+            # If no replacement word exists, then just return the same word :(
+            return word
         
         # Select one at random
         newWord = potentialWords[random.randint(0, len(potentialWords))]
         
         # If our original word was capitalised, then capitalise this one too.
-        if keepCaptial and word[0:firstLetters].isupper():
+        if keepCaptial and word[0].isupper():
             newWord = newWord.title()
         
         # TODO: Support brackets (){}[]
