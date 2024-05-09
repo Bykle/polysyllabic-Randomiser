@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 
 from common import countSyllables
+import argparse
 import json
 import random
+import sys
 
 class Randomiser:
     def __init__(self, dictionaryPath):
@@ -31,7 +33,6 @@ class Randomiser:
         if keepCaptial and word[0].isupper():
             newWord = newWord.title()
         
-        # TODO: Support brackets (){}[]
         # If our original word had some sort of punctuation, then copy it over.
         if keepPunctuation and word[-1] in ['?','.',',','!']:
             newWord += str(word[-1])
@@ -46,6 +47,10 @@ class Randomiser:
         # Enumerate over them
         for idx, word in enumerate(words):
             
+            # Skip the word if it's just white space.
+            if word == "":
+                continue
+
             # If our word has enough syllables, then replace it, retaining capitalisation.
             if countSyllables(word) > minSyllables:
                 words[idx] = self.replaceWord(word, keepCaptial=keepCaptials)
@@ -67,6 +72,18 @@ class Randomiser:
             # Catch if a user pressed CTRL+C (SIGINT)
             print("")
             return
-            
+
+def getArgs(parser=argparse.ArgumentParser()):
+    parser.add_argument('-i', '--interative', action='store_true' ,help="Interactive mode")
+    parser.add_argument('-d', '--dictionary', help="Dictionary file location", default="dictionary.json")
+    return parser.parse_args()
+
 if __name__=="__main__":
-    Randomiser("dictionary.json").interactiveInput()
+    args = getArgs()
+    randomiser = Randomiser(args.dictionary)
+    if args.interative:
+        randomiser.interactiveInput()
+    else:
+        for line in sys.stdin:
+            print(line)
+            print(randomiser.replaceSentence(line.rstrip()))
