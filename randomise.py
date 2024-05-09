@@ -13,7 +13,7 @@ class Randomiser:
         with open(path,'r') as handle:
             return json.load(handle)
     
-    def replaceWord(self, word, keepCaptial=True):
+    def replaceWord(self, word, keepCaptial=True, keepPunctuation=True):
         # Count how many syllables are in this word
         syllableCount = countSyllables(word)
         
@@ -27,6 +27,10 @@ class Randomiser:
         if keepCaptial and word[0].isupper():
             newWord = newWord.title()
         
+        # TODO: Support brackets (){}[]
+        if keepPunctuation and word[-1] in ['?','.',',','!']:
+            newWord += str(word[-1])
+
         # Return our new word
         return newWord
     
