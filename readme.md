@@ -14,7 +14,7 @@ Inspired by one of the many [Steamed Hams edits](https://www.youtube.com/results
 ```
 ```
 ./randomise.py 
-> The Linux Kernel Organization is a California Public Benefit Corporation established in 2002 to distribute the Linux kernel and other Open Source software to the public without charge.
-The Lucia Kevin Occupational is a Customized Permits Becomes Consecutive equilibrium in 2002 to diabetes the Lyric kidney and owner Outlook Source stolen to the panel weighted clinic.
-> 
+> Linux is a clone of the operating system Unix, written from scratch by Linus Torvalds with assistance from a loosely-knit team of hackers across the Net.
+Likes is a clone of the operator symbol Unless, writer from scratch by Listed Toolbar with assignment from a loosely-knit team of handhelds acids the Net.
+>
 ```
