@@ -53,7 +53,7 @@ class Randomiser:
         try:
             sentence = input('> ')
             while sentence != exitTerm:
-                print(randomiser.replaceSentence(sentence))
+                print(self.replaceSentence(sentence))
                 sentence = input('> ')
         except EOFError:
             # Catch if a user pressed CTRL+D (EOF)
